@@ -1025,18 +1025,19 @@ static int srun_launch(unifyfs_resource_t* resource,
     snprintf(n_nodes, sizeof(n_nodes), "-N%zu", resource->n_nodes);
 
     // full command: srun <srun args> <server args>
-    srun_argc = 6;
+    srun_argc = 7;
     server_argc = construct_server_argv(args, NULL);
 
     // setup full command argv
     argc = 1 + srun_argc + server_argc;
     argv = calloc(argc, sizeof(char*));
     argv[0] = strdup("srun");
-    argv[1] = strdup("--exact");
-    argv[2] = strdup("--overcommit");
-    argv[3] = strdup(n_nodes);
-    argv[4] = strdup("--ntasks-per-node=1");
-    argv[5] = strdup(n_cores);
+    argv[1] = strdup("-s");
+    argv[2] = strdup("--exact");
+    argv[3] = strdup("--overcommit");
+    argv[4] = strdup(n_nodes);
+    argv[5] = strdup("--ntasks-per-node=1");
+    argv[6] = strdup(n_cores);
     construct_server_argv(args, argv + srun_argc);
 
     execvp(argv[0], argv);
@@ -1062,17 +1063,18 @@ static int srun_terminate(unifyfs_resource_t* resource,
     snprintf(n_nodes, sizeof(n_nodes), "-N%zu", resource->n_nodes);
 
     // full command: srun <srun args> pkill -n unifyfsd
-    srun_argc = 8;
+    srun_argc = 9;
     argc = 1 + srun_argc;
     argv = calloc(argc, sizeof(char*));
     argv[0] = strdup("srun");
-    argv[1] = strdup("--exact");
-    argv[2] = strdup("--overcommit");
-    argv[3] = strdup(n_nodes);
-    argv[4] = strdup("--ntasks-per-node=1");
-    argv[5] = strdup("pkill");
-    argv[6] = strdup("-n");
-    argv[7] = strdup("unifyfsd");
+    argv[1] = strdup("-s");
+    argv[2] = strdup("--exact");
+    argv[3] = strdup("--overcommit");
+    argv[4] = strdup(n_nodes);
+    argv[5] = strdup("--ntasks-per-node=1");
+    argv[6] = strdup("pkill");
+    argv[7] = strdup("-n");
+    argv[8] = strdup("unifyfsd");
 
     execvp(argv[0], argv);
     perror("failed to execvp() srun to pkill unifyfsd");

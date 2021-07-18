@@ -25,8 +25,8 @@ nprocs=${UNIFYFS_CI_NPROCS:-1}
 
 app_out="-o"
 app_err="-e"
-JOB_RUN_COMMAND="srun -N ${nnodes} --ntasks-per-node=${nprocs}"
-JOB_RUN_ONCE_PER_NODE="srun -n ${nnodes}"
+JOB_RUN_COMMAND="srun -N ${nnodes} --ntasks-per-node=${nprocs} -s"
+JOB_RUN_ONCE_PER_NODE="srun -n ${nnodes} -s"
 JOB_ID=${JOB_ID:-$SLURM_JOBID}
 
 # Set up producer-consumer variables and functions when using two or more hosts
