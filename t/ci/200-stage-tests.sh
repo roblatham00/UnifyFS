@@ -96,10 +96,8 @@ test_expect_success "destination directory is empty" '
 FINAL_OUTPUT_FILE=${MY_DEST_DIR}/destination_200_${TEST_FILE_SIZE_IN_MB}_${STAGE_TEST_INDEX}.file
 MAN_IN=${MY_CONFIG_DIR}/stage_IN_${TEST_FILE_SIZE_IN_MB}_${STAGE_TEST_INDEX}.manifest
 MAN_OUT=${MY_CONFIG_DIR}/stage_OUT_${TEST_FILE_SIZE_IN_MB}_${STAGE_TEST_INDEX}.manifest
-echo "\"${MY_INPUT_FILE}\"                                   \
-     \"${UNIFYFS_MP}/intermediate_${STAGE_TEST_INDEX}.file\""  > ${MAN_IN}
-echo "\"${UNIFYFS_MP}/intermediate_${STAGE_TEST_INDEX}.file\" \
-     \"${FINAL_OUTPUT_FILE}\"" > ${MAN_OUT}
+echo "\"${MY_INPUT_FILE}\" \"${UNIFYFS_MP}/intermediate_${STAGE_TEST_INDEX}.file\""  > ${MAN_IN}
+echo "\"${UNIFYFS_MP}/intermediate_${STAGE_TEST_INDEX}.file\" \"${FINAL_OUTPUT_FILE}\"" > ${MAN_OUT}
 
 test_expect_success "config directory now has manifest files" '
     test_path_is_file  ${MAN_IN} &&
@@ -156,9 +154,5 @@ else
       ${ELAPSED_TIME_IN} ${ELAPSED_TIME_OUT}          \
       ^${STAGE_TEST_OVERALL_CONFIG}^                  \
       @${STAGE_TEST_SPECIFIC_CONFIG}@ %GOOD%"         \
-      >> ${UNIFYFS_LOG_DIR}/timings_${JOB_ID}.dat     \
+      >> ${UNIFYFS_LOG_DIR}/timings_${JOB_ID}.dat
 fi
-
-# nothing to output or return because the results went to the
-# timing file.
-
