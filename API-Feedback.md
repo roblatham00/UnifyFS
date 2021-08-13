@@ -42,6 +42,10 @@ Pull requests on github
 - not sure how to convey final location for Unify through ROMIO
 - probably makes sense to call `unifyfs_dispatch_transfer` and `unifyfs_wait_transfer` at mpi close time?
 
+## userpsace utilities?
+
+- Is there a `unifyfs-ls` ?
+
 ## Helpful notes to future-me
 
 - "What is going wrong?"  -- set environment variable `UNIFYFS_LOG_VERBOSITY` to 5
