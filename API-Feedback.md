@@ -16,6 +16,7 @@ Using the Unify API to write a ROMIO driver
 - Trivial to look for `O_CREAT` flag but is the difference really necessary?
 - expect excatly one person to create
 - `unify_open` just a hash on the file
+- everyone has to call `unify_open` or `unify_create`
 
 
 ## Semantics
@@ -79,6 +80,11 @@ Pull requests on github
   1. create `hostfile` similar to mpich machine file:  number of processes on a node and node name e.g. `1 localhost`
   1. set `UNIFYFS_SERVER_HOSTFILE` environment variable
   1. run `unifyfsd`
+
+- `export UNIFYFS_LOGIO_CHUNK_SIZE=1024` needed to pass ROMIO tests.  What are the tradeoffs for such a small chunk size?
+- `export  UNIFYFS_LOGIO_SHMEM_SIZE=0` when running the ROMIO test suite.  The
+  shared memory regions are a kind of staging area.  The server removes them on
+  its exit, not the clients.
 
 ## optimizations not yet implemented
 - list-io optimization, but depends on how/when i/o happens
